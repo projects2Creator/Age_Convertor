@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>👨‍🚀 Astronaut Age Converter</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(ellipse at center, #1e3c72, #2a5298);
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: rgba(0,0,0,0.2);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      width: 200px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      background: #00c9ff;
+      color: #000;
+      border: none;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #92fe9d;
+    }
+
+    .results {
+      margin-top: 2rem;
+      text-align: left;
+      font-size: 1.1rem;
+    }
+
+    .planet {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>👨‍🚀 Astronaut Age Converter</h1>
+  <p>Enter your age on Earth:</p>
+  <div class="container">
+    <input type="number" id="earthAge" placeholder="e.g. 18" />
+    <button onclick="convertAge()">Convert</button>
+    <div class="results" id="results"></div>
+  </div>
+
+  <script>
+    const orbitYears = {
+      Mercury: 0.24,
+      Venus: 0.62,
+      Earth: 1,
+      Mars: 1.88,
+      Jupiter: 11.86,
+      Saturn: 29.46,
+      Uranus: 84.01,
+      Neptune: 164.8,
+      Pluto: 248.0
+    };
+
+    const emoji = {
+      Mercury: "🧿",   // Custom choice: abstract symbol (no actual Mercury emoji exists)
+      Venus: "🟡",     // Golden tone — closest to Venus visually
+      Earth: "🌍",
+      Mars: "🔴",
+      Jupiter: "🟠",
+      Saturn: "🪐",
+      Uranus: "🔵",
+      Neptune: "🌀",
+      Pluto: "❄️"
+    };
+
+    function convertAge() {
+      const age = parseFloat(document.getElementById("earthAge").value);
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = "";
+
+      if (isNaN(age) || age <= 0) {
+        resultsDiv.innerHTML = "<p>Please enter a valid age.</p>";
+        return;
+      }
+
+      for (let planet in orbitYears) {
+        const newAge = (age / orbitYears[planet]).toFixed(2);
+        resultsDiv.innerHTML += `
+          <div class="planet">${emoji[planet]} <strong>${planet}</strong>: ${newAge} years old</div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>
